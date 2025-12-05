@@ -41,10 +41,20 @@
     }
 
     nav {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto 1fr;
       align-items: center;
+      gap: 12px;
       margin-bottom: 32px;
+      position: sticky;
+      top: 0;
+      padding: 12px 14px;
+      background: rgba(247, 249, 251, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      border: 1px solid #dce8e8;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      z-index: 10;
     }
 
     nav .brand {
@@ -54,12 +64,50 @@
       letter-spacing: 0.4px;
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
     nav a {
       color: var(--muted);
       text-decoration: none;
-      margin-left: 18px;
+      padding: 10px 14px;
       font-weight: 600;
       font-size: 14px;
+      border-radius: 8px;
+      transition: background-color 140ms ease, color 140ms ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: rgba(31, 109, 109, 0.1);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .menu-button {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid #d0e3e3;
+      background: var(--card);
+      color: var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .menu-button:hover,
+    .menu-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      outline: none;
     }
 
     .hero {
@@ -232,6 +280,51 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+    @media (max-width: 780px) {
+      nav {
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 10px 12px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+      }
+
+      .menu-button {
+        display: inline-flex;
+        justify-self: end;
+      }
+
+      .nav-links {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 10px 6px;
+        background: var(--card);
+        border: 1px solid #d0e3e3;
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        grid-column: 1 / -1;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      nav a {
+        width: 100%;
+        text-align: left;
+        border: 1px solid #e6ecf0;
+        background: #f6fbfb;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -239,10 +332,13 @@
     <div class="container">
       <nav>
         <div class="brand">Briny Grove Farmstead</div>
-        <div>
-          <a href="#pillars">What We Do</a>
-          <a href="#hospitality">Hospitality</a>
-          <a href="#values">Values</a>
+        <button class="menu-button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+          ☰ Menu
+        </button>
+        <div class="nav-links" id="nav-links">
+          <a href="#pillars">Orchard</a>
+          <a href="#symbiosis">Symbiosis</a>
+          <a href="#vision">Vision</a>
         </div>
       </nav>
 
@@ -251,9 +347,10 @@
           <div class="badge">Sea-to-soil circularity · Pacific Northwest rooted</div>
           <h1>Regenerative hazelnuts and truffles on Washington's coastal edge.</h1>
           <p class="lead">
-            Briny Grove Farmstead is a developing 10-acre orchard marrying coastal influence with regenerative agriculture.
-            We integrate biology, mycology, and shell-based soil care to cultivate European hazelnuts, inoculated truffle hosts,
-            and a terroir shaped by the sea.
+            Briny Grove Farmstead is a 10-acre regenerative orchard in Washington State centered on a unique marriage of hazelnut
+            cultivation and Périgord black truffle production. The farm is built around a circular, sea-to-soil philosophy that
+            transforms waste oyster shells from Puget Sound into a valuable soil input—closing loops, reducing waste, and creating
+            a maritime-influenced terroir.
           </p>
           <div class="cta-group">
             <a class="btn btn-primary" href="mailto:hello@brinygrove.com">Connect with the farm</a>
@@ -275,70 +372,74 @@
 
   <section id="pillars">
     <div class="container">
-      <h2>What happens at Briny Grove</h2>
-      <p class="section-lead">A resilient orchard designed for long-term production, learning, and memorable gatherings.</p>
+      <h2>Hazelnut + truffle orchard</h2>
+      <p class="section-lead">A resilient, dual-purpose planting crafted for long-term canopy health, fungal vigor, and coastal terroir.</p>
       <div class="card-grid">
         <div class="card">
-          <h3>Primary production</h3>
-          <p>European hazelnuts and carefully inoculated truffle hosts grown for future commercial harvests.</p>
+          <h3>Hazelnuts</h3>
+          <p>Cold-hardy European hazelnuts selected for disease resistance, productivity, and flavor—laid out for stable root zones, runoff control, and fungal health.</p>
         </div>
         <div class="card">
-          <h3>Regenerative soil management</h3>
-          <p>Biology-forward orchard care, mycology insight, and annual oyster shell liming to build mineral-rich, living soils.</p>
+          <h3>Périgord truffles</h3>
+          <p>Tuber melanosporum nurtured beneath the trees through careful inoculation and long-term mycorrhizal stewardship.</p>
         </div>
         <div class="card">
-          <h3>Agrotourism & hospitality</h3>
-          <p>Curated event space for weddings, farm dinners, and seasonal gatherings set amid the orchard rows.</p>
+          <h3>Coastal inputs</h3>
+          <p>Annual liming with valorized oyster shells keeps soils alkaline for truffle production while sustaining nut yield and resilience.</p>
         </div>
         <div class="card">
-          <h3>On-farm education</h3>
-          <p>Workshops on sustainable orchard design, permaculture principles, and circular resource loops.</p>
+          <h3>Regenerative discipline</h3>
+          <p>Biology-forward orchard care informed by mycology, permaculture practice, and shell-based mineral amendments.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="hospitality" style="background: #eef4f5;">
+  <section id="symbiosis" style="background: #eef4f5;">
     <div class="container">
-      <h2>Hospitality with a coastal terroir</h2>
-      <p class="section-lead">From intimate farm dinners to full-scale celebrations, the farmstead showcases Pacific Northwest identity and a sea-to-soil story.</p>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Curated gatherings</h3>
-          <p>Outdoor spaces framed by orchard rows for weddings, seasonal suppers, and community celebrations.</p>
-        </div>
-        <div class="card">
-          <h3>Immersive experiences</h3>
-          <p>Guided walks, tastings, and educational moments that connect guests to the land, fungi, and coastal inputs.</p>
-        </div>
-        <div class="card">
-          <h3>Modular infrastructure</h3>
-          <p>Thoughtful, scalable build-out driven by a background in construction project management.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="values">
-    <div class="container">
-      <h2>Why Briny Grove is different</h2>
-      <p class="section-lead">The farm blends science, craftsmanship, and circular resources to create a distinctive orchard identity.</p>
+      <h2>Symbiosis &amp; codependence</h2>
+      <p class="section-lead">Hazelnuts and Périgord black truffles thrive together through deliberate partnership.</p>
       <div class="list">
         <div class="list-item">
-          <span class="pill">Sea-to-soil circularity</span>
-          <p>Locally sourced oyster shells provide annual liming, boosting soil health and weaving coastal influence into every harvest.</p>
+          <span class="pill">Sugars to the fungi</span>
+          <p>The hazelnut roots provide plant-derived carbohydrates essential for truffle formation.</p>
         </div>
         <div class="list-item">
-          <span class="pill">Ecology first</span>
-          <p>Regenerative orchard design informed by biology, mycology, and permaculture training builds resilience from the ground up.</p>
+          <span class="pill">Nutrients to the trees</span>
+          <p>The truffle mycorrhiza increases nutrient uptake, improves soil structure, and boosts tree health.</p>
         </div>
         <div class="list-item">
-          <span class="pill">Craft + science</span>
-          <p>Anchored in experience across genomics, construction, and mushroom cultivation to deliver precise, scalable systems.</p>
+          <span class="pill">Shell-powered balance</span>
+          <p>Annual liming with upcycled oyster shells maintains the alkaline soil conditions needed for truffles while reinforcing hazelnut vigor.</p>
         </div>
         <div class="list-item">
-          <span class="pill">Ready to grow</span>
-          <p>Modular infrastructure supports education, agritourism, and eventual commercial hazelnut and truffle sales.</p>
+          <span class="pill">Shared terroir</span>
+          <p>An ecosystem where outputs become inputs, binding orchard and coast into one distinctive flavor profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vision">
+    <div class="container">
+      <h2>Farmstead vision</h2>
+      <p class="section-lead">A working orchard and gathering place shaped by craftsmanship, ecology, and coastal influence.</p>
+      <div class="list">
+        <div class="list-item">
+          <span class="pill">Hazelnut harvests</span>
+          <p>Future culinary and value-added products from disease-resistant European cultivars.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Périgord truffle seasons</span>
+          <p>Long-term production paired with seasonal foraging experiences to share the orchard's underground bounty.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Coastal soil regeneration</span>
+          <p>A shell-driven amendment program that translates maritime byproducts into orchard health and terroir.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Events &amp; education</span>
+          <p>Spaces for weddings, farm dinners, and workshops—supported by modular infrastructure and construction know-how.</p>
         </div>
       </div>
     </div>
@@ -351,5 +452,16 @@
       <p>Reach out at <a href="mailto:hello@brinygrove.com">hello@brinygrove.com</a></p>
     </div>
   </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.getElementById('nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
+  </script>
 </body>
 </html>
