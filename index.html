@@ -2,10 +2,512 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Briny Grove Farmstead</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --parchment: #f5f3ef;
+      --card: #fdfbf7;
+      --ink: #1f1c18;
+      --muted: #4b463d;
+      --deep-green: #275b63;
+      --sage: #6b857b;
+      --brown: #5b4332;
+      --border: #dfd5c7;
+      --shadow: 0 10px 26px rgba(46, 36, 28, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.03em;
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    body > header {
+      padding: 28px 18px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body > header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 24%, rgba(39, 91, 99, 0.08), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(91, 67, 50, 0.07), transparent 28%),
+        radial-gradient(circle at 60% 70%, rgba(107, 133, 123, 0.08), transparent 38%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin-bottom: 24px;
+      background: rgba(253, 251, 247, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--deep-green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: #f0ebe2;
+      border-color: var(--border);
+      color: var(--deep-green);
+      outline: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 22px;
+      max-width: 680px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #e8ede6;
+      color: var(--deep-green);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--deep-green);
+      color: #fdfbf7;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: #1f4b52;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--brown);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: #f0ebe2;
+      color: var(--deep-green);
+      outline: none;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .stat {
+      background: #eef0ea;
+      color: var(--deep-green);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: 1px solid #dcd6c8;
+    }
+
+    section {
+      padding: 64px 18px;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 26px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .list-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(253, 251, 247, 0.7);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e7ede5;
+      color: var(--deep-green);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      border: 1px solid #d6cfc1;
+      white-space: nowrap;
+    }
+
+    footer {
+      background: #f0ebe2;
+      color: var(--muted);
+      padding: 36px 18px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer h3 {
+      font-size: 24px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    footer a {
+      color: var(--deep-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 780px) {
+      nav {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 12px 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      nav a {
+        flex: 1 1 100%;
+        width: 100%;
+        text-align: left;
+        border: 1px solid var(--border);
+        background: #f0ebe2;
+      }
+
+      .hero {
+        gap: 26px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Briny Grove Farmstead</h1>
-  <p>Landing page coming soon.</p>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand" aria-label="Briny Grove Farmstead">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="bark" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#5b4332" />
+                <stop offset="100%" stop-color="#3f2f23" />
+              </linearGradient>
+            </defs>
+            <rect x="8" y="8" width="104" height="104" rx="16" fill="#fdfbf7" stroke="#d8cdbf" />
+            <path d="M38 70c6-14 12-28 22-28s18 14 22 28" fill="none" stroke="url(#bark)" stroke-width="6" stroke-linecap="round" />
+            <path d="M44 66c-5-8-2-26 16-26s22 14 16 26" fill="none" stroke="#6b857b" stroke-width="5" stroke-linecap="round" />
+            <circle cx="44" cy="52" r="6" fill="#6b857b" />
+            <circle cx="60" cy="46" r="7" fill="#275b63" />
+            <circle cx="76" cy="52" r="6" fill="#6b857b" />
+            <path d="M60 70c-8 8-14 16-22 16" fill="none" stroke="#275b63" stroke-width="4" stroke-linecap="round" />
+            <path d="M60 70c6 8 14 16 22 16" fill="none" stroke="#275b63" stroke-width="4" stroke-linecap="round" />
+            <path d="M54 80c-4 8-12 14-24 14" fill="none" stroke="#5b4332" stroke-width="3" stroke-linecap="round" />
+            <path d="M66 80c4 8 12 14 24 14" fill="none" stroke="#5b4332" stroke-width="3" stroke-linecap="round" />
+            <path d="M24 94c10-2 22-6 32-20 12 14 22 18 40 20" fill="none" stroke="#275b63" stroke-width="3" stroke-linecap="round" />
+            <path d="M30 92c14 4 46 4 60 0" fill="none" stroke="#c4b7a4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Briny Grove Farmstead
+        </div>
+        <div class="nav-links" id="nav-links">
+          <a href="#pillars">Orchard</a>
+          <a href="#symbiosis">Symbiosis</a>
+          <a href="#vision">Vision</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="badge">Sea-to-soil circularity · Pacific Northwest rooted</div>
+          <h1>Regenerative hazelnuts and truffles on Washington's coastal edge.</h1>
+          <p class="lead">
+            Briny Grove Farmstead is a 10-acre regenerative orchard in Washington State where hazelnut trees double as the inoculated hosts for Périgord black truffles. The farm is built around a circular, sea-to-soil philosophy that transforms waste oyster shells from Puget Sound into a valuable soil input—closing loops, reducing waste, and creating a maritime-influenced terroir.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="mailto:hello@brinygrove.com">Connect with the farm</a>
+            <a class="btn btn-secondary" href="#pillars">Explore the orchard vision</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Farmstead snapshot">
+          <header>
+            <h3>Farmstead snapshot</h3>
+          </header>
+          <div class="stat-grid">
+            <div class="stat">10-acre orchard footprint</div>
+            <div class="stat">Hazelnut trees as inoculated truffle hosts</div>
+            <div class="stat">Oyster shell liming for living soils and terroir</div>
+            <div class="stat">Built for events, education, and harvests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="pillars">
+    <div class="container">
+      <div class="section-header">
+        <h2>Hazelnut + truffle orchard</h2>
+        <p>A resilient, dual-purpose planting crafted for long-term canopy health, fungal vigor, and coastal terroir.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Hazelnuts</h3>
+          <p>Cold-hardy European hazelnuts selected for disease resistance, productivity, and flavor—laid out for stable root zones, runoff control, and fungal health, and inoculated to host Périgord truffles.</p>
+        </div>
+        <div class="card">
+          <h3>Périgord truffles</h3>
+          <p>Tuber melanosporum nurtured beneath the very hazelnut trees, which serve as inoculated hosts for the truffle mycorrhiza through long-term stewardship.</p>
+        </div>
+        <div class="card">
+          <h3>Coastal inputs</h3>
+          <p>Annual liming with valorized oyster shells keeps soils alkaline for truffle production while sustaining nut yield and resilience.</p>
+        </div>
+        <div class="card">
+          <h3>Regenerative discipline</h3>
+          <p>Biology-forward orchard care informed by mycology, permaculture practice, and shell-based mineral amendments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="symbiosis" style="background: #f0ebe2;">
+    <div class="container">
+      <div class="section-header">
+        <h2>Symbiosis &amp; codependence</h2>
+        <p>Hazelnuts and Périgord black truffles thrive together through deliberate partnership.</p>
+      </div>
+      <div class="list">
+        <div class="list-item">
+          <span class="pill">Sugars to the fungi</span>
+          <p>The hazelnut roots provide plant-derived carbohydrates essential for truffle formation because the trees themselves are the inoculated hosts.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Nutrients to the trees</span>
+          <p>The truffle mycorrhiza increases nutrient uptake, improves soil structure, and boosts tree health.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Shell-powered balance</span>
+          <p>Annual liming with upcycled oyster shells maintains the alkaline soil conditions needed for truffles while reinforcing hazelnut vigor.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Shared terroir</span>
+          <p>An ecosystem where outputs become inputs, binding orchard and coast into one distinctive flavor profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vision">
+    <div class="container">
+      <div class="section-header">
+        <h2>Farmstead vision</h2>
+        <p>A working orchard and gathering place shaped by craftsmanship, ecology, and coastal influence.</p>
+      </div>
+      <div class="list">
+        <div class="list-item">
+          <span class="pill">Hazelnut harvests</span>
+          <p>Future culinary and value-added products from disease-resistant European cultivars.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Périgord truffle seasons</span>
+          <p>Long-term production paired with seasonal foraging experiences to share the orchard's underground bounty.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Coastal soil regeneration</span>
+          <p>A shell-driven amendment program that translates maritime byproducts into orchard health and terroir.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Events &amp; education</span>
+          <p>Spaces for weddings, farm dinners, and workshops—supported by modular infrastructure and construction know-how.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <h3>Briny Grove Farmstead</h3>
+      <p>Regenerative hazelnuts and truffles shaped by the Pacific Northwest coast.</p>
+      <p>Reach out at <a href="mailto:hello@brinygrove.com">hello@brinygrove.com</a></p>
+    </div>
+  </footer>
 </body>
 </html>
