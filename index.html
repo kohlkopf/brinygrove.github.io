@@ -68,11 +68,17 @@
       z-index: 1;
     }
 
+    .header-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
     nav {
       position: sticky;
       top: 0;
       z-index: 10;
-      margin-bottom: 24px;
+      margin-bottom: 6px;
       background: rgba(253, 251, 247, 0.96);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -82,22 +88,22 @@
       grid-template-columns: auto 1fr;
       align-items: center;
       gap: 18px;
+      order: -1;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 700;
       font-size: 18px;
       color: var(--deep-green);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-    }
-
-    .brand svg {
-      width: 36px;
-      height: 36px;
+      padding: 4px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(232, 237, 230, 0.7);
     }
 
     .nav-links {
@@ -329,27 +335,37 @@
     }
 
     @media (max-width: 780px) {
+      .header-layout {
+        display: flex;
+        flex-direction: column;
+      }
+
       nav {
+        order: 2;
+        position: static;
         grid-template-columns: 1fr;
         align-items: flex-start;
-        gap: 10px;
-        padding: 12px 12px 10px;
+        gap: 8px;
+        padding: 10px 12px 12px;
       }
 
       .nav-links {
         width: 100%;
         justify-content: flex-start;
+        gap: 8px;
       }
 
       nav a {
-        flex: 1 1 100%;
-        width: 100%;
+        flex: 0 1 auto;
+        padding: 8px 12px;
         text-align: left;
         border: 1px solid var(--border);
         background: #f0ebe2;
+        border-radius: 18px;
       }
 
       .hero {
+        order: 1;
         gap: 26px;
       }
 
@@ -363,60 +379,39 @@
 <body>
   <header>
     <div class="container">
-      <nav>
-        <div class="brand" aria-label="Briny Grove Farmstead">
-          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="bark" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#5b4332" />
-                <stop offset="100%" stop-color="#3f2f23" />
-              </linearGradient>
-            </defs>
-            <rect x="8" y="8" width="104" height="104" rx="16" fill="#fdfbf7" stroke="#d8cdbf" />
-            <path d="M38 70c6-14 12-28 22-28s18 14 22 28" fill="none" stroke="url(#bark)" stroke-width="6" stroke-linecap="round" />
-            <path d="M44 66c-5-8-2-26 16-26s22 14 16 26" fill="none" stroke="#6b857b" stroke-width="5" stroke-linecap="round" />
-            <circle cx="44" cy="52" r="6" fill="#6b857b" />
-            <circle cx="60" cy="46" r="7" fill="#275b63" />
-            <circle cx="76" cy="52" r="6" fill="#6b857b" />
-            <path d="M60 70c-8 8-14 16-22 16" fill="none" stroke="#275b63" stroke-width="4" stroke-linecap="round" />
-            <path d="M60 70c6 8 14 16 22 16" fill="none" stroke="#275b63" stroke-width="4" stroke-linecap="round" />
-            <path d="M54 80c-4 8-12 14-24 14" fill="none" stroke="#5b4332" stroke-width="3" stroke-linecap="round" />
-            <path d="M66 80c4 8 12 14 24 14" fill="none" stroke="#5b4332" stroke-width="3" stroke-linecap="round" />
-            <path d="M24 94c10-2 22-6 32-20 12 14 22 18 40 20" fill="none" stroke="#275b63" stroke-width="3" stroke-linecap="round" />
-            <path d="M30 92c14 4 46 4 60 0" fill="none" stroke="#c4b7a4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          Briny Grove Farmstead
-        </div>
-        <div class="nav-links" id="nav-links">
-          <a href="#pillars">Orchard</a>
-          <a href="#symbiosis">Symbiosis</a>
-          <a href="#vision">Vision</a>
-        </div>
-      </nav>
-
-      <div class="hero">
-        <div class="hero-copy">
-          <div class="badge">Sea-to-soil circularity · Pacific Northwest rooted</div>
-          <h1>Regenerative hazelnuts and truffles on Washington's coastal edge.</h1>
-          <p class="lead">
-            Briny Grove Farmstead is a 10-acre regenerative orchard in Washington State where hazelnut trees double as the inoculated hosts for Périgord black truffles. The farm is built around a circular, sea-to-soil philosophy that transforms waste oyster shells from Puget Sound into a valuable soil input—closing loops, reducing waste, and creating a maritime-influenced terroir.
-          </p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="mailto:hello@brinygrove.com">Connect with the farm</a>
-            <a class="btn btn-secondary" href="#pillars">Explore the orchard vision</a>
+      <div class="header-layout">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="badge">Sea-to-soil circularity · Pacific Northwest rooted</div>
+            <h1>Regenerative hazelnuts and truffles near Washington's Puget Sound.</h1>
+            <p class="lead">
+              Briny Grove Farmstead is a 10-acre regenerative orchard in Washington State where hazelnut trees double as the inoculated hosts for Périgord black truffles. The farm is built around a circular, sea-to-soil philosophy that transforms waste oyster shells from Puget Sound into a valuable soil input—closing loops, reducing waste, and creating a Puget Sound-influenced terroir.
+            </p>
+            <div class="cta-group">
+              <a class="btn btn-primary" href="mailto:hello@brinygrove.com">Connect with the farm</a>
+              <a class="btn btn-secondary" href="#pillars">Explore the orchard vision</a>
+            </div>
+          </div>
+          <div class="hero-card" aria-label="Farmstead snapshot">
+            <header>
+              <h3>Farmstead snapshot</h3>
+            </header>
+            <div class="stat-grid">
+              <div class="stat">10-acre orchard footprint</div>
+              <div class="stat">European Hazelnuts + Périgord truffles</div>
+              <div class="stat">Oyster shell liming for living soils and terroir</div>
+              <div class="stat">Built for events, education, and harvests</div>
+            </div>
           </div>
         </div>
-        <div class="hero-card" aria-label="Farmstead snapshot">
-          <header>
-            <h3>Farmstead snapshot</h3>
-          </header>
-          <div class="stat-grid">
-            <div class="stat">10-acre orchard footprint</div>
-            <div class="stat">Hazelnut trees as inoculated truffle hosts</div>
-            <div class="stat">Oyster shell liming for living soils and terroir</div>
-            <div class="stat">Built for events, education, and harvests</div>
+        <nav>
+          <div class="brand" aria-label="Briny Grove Farmstead">Briny Grove Farmstead</div>
+          <div class="nav-links" id="nav-links">
+            <a href="#pillars">Orchard</a>
+            <a href="#symbiosis">Symbiosis</a>
+            <a href="#vision">Vision</a>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   </header>
@@ -425,7 +420,7 @@
     <div class="container">
       <div class="section-header">
         <h2>Hazelnut + truffle orchard</h2>
-        <p>A resilient, dual-purpose planting crafted for long-term canopy health, fungal vigor, and coastal terroir.</p>
+        <p>A resilient, dual-purpose planting crafted for long-term canopy health, fungal vigor, and Puget Sound terroir.</p>
       </div>
       <div class="card-grid">
         <div class="card">
@@ -437,8 +432,8 @@
           <p>Tuber melanosporum nurtured beneath the very hazelnut trees, which serve as inoculated hosts for the truffle mycorrhiza through long-term stewardship.</p>
         </div>
         <div class="card">
-          <h3>Coastal inputs</h3>
-          <p>Annual liming with valorized oyster shells keeps soils alkaline for truffle production while sustaining nut yield and resilience.</p>
+          <h3>Puget Sound shell inputs</h3>
+          <p>Annual liming with upcycled oyster shells keeps soils alkaline for truffle production while sustaining nut yield and resilience.</p>
         </div>
         <div class="card">
           <h3>Regenerative discipline</h3>
@@ -469,7 +464,7 @@
         </div>
         <div class="list-item">
           <span class="pill">Shared terroir</span>
-          <p>An ecosystem where outputs become inputs, binding orchard and coast into one distinctive flavor profile.</p>
+          <p>An ecosystem where outputs become inputs, binding orchard and Puget Sound influence into one distinctive flavor profile.</p>
         </div>
       </div>
     </div>
@@ -479,7 +474,7 @@
     <div class="container">
       <div class="section-header">
         <h2>Farmstead vision</h2>
-        <p>A working orchard and gathering place shaped by craftsmanship, ecology, and coastal influence.</p>
+        <p>A working orchard and gathering place shaped by craftsmanship, ecology, and Puget Sound influence.</p>
       </div>
       <div class="list">
         <div class="list-item">
@@ -491,7 +486,7 @@
           <p>Long-term production paired with seasonal foraging experiences to share the orchard's underground bounty.</p>
         </div>
         <div class="list-item">
-          <span class="pill">Coastal soil regeneration</span>
+          <span class="pill">Puget Sound soil regeneration</span>
           <p>A shell-driven amendment program that translates maritime byproducts into orchard health and terroir.</p>
         </div>
         <div class="list-item">
@@ -505,7 +500,7 @@
   <footer>
     <div class="container">
       <h3>Briny Grove Farmstead</h3>
-      <p>Regenerative hazelnuts and truffles shaped by the Pacific Northwest coast.</p>
+      <p>Regenerative hazelnuts and truffles shaped by the Pacific Northwest and Puget Sound.</p>
       <p>Reach out at <a href="mailto:hello@brinygrove.com">hello@brinygrove.com</a></p>
     </div>
   </footer>
