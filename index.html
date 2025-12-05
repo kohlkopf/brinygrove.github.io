@@ -2,10 +2,354 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Briny Grove Farmstead</title>
+  <style>
+    :root {
+      --bg: #f7f8f9;
+      --accent: #1f6d6d;
+      --accent-light: #e3f2f2;
+      --text: #1f2a32;
+      --muted: #5c6b73;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: radial-gradient(circle at 20% 20%, #d9f2f2, transparent 35%),
+        radial-gradient(circle at 80% 10%, #e4f0ff, transparent 30%),
+        linear-gradient(135deg, #e7f4f7, #f7f9fb);
+      padding: 56px 18px 72px;
+      border-bottom: 1px solid #e6ecf0;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    nav .brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.4px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      margin: 12px 0 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--accent);
+      border: 1px solid #d8e6e6;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e6ecf0;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      background: var(--accent-light);
+      border-radius: 14px;
+      padding: 16px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    section {
+      padding: 64px 18px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 740px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e6ecf0;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 0;
+    }
+
+    .list-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    footer {
+      background: #0f1b24;
+      color: #dbe6eb;
+      padding: 36px 18px 48px;
+    }
+
+    footer a {
+      color: #9cd5d5;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
-  <h1>Briny Grove Farmstead</h1>
-  <p>Landing page coming soon.</p>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Briny Grove Farmstead</div>
+        <div>
+          <a href="#pillars">What We Do</a>
+          <a href="#hospitality">Hospitality</a>
+          <a href="#values">Values</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div>
+          <div class="badge">Sea-to-soil circularity · Pacific Northwest rooted</div>
+          <h1>Regenerative hazelnuts and truffles on Washington's coastal edge.</h1>
+          <p class="lead">
+            Briny Grove Farmstead is a developing 10-acre orchard marrying coastal influence with regenerative agriculture.
+            We integrate biology, mycology, and shell-based soil care to cultivate European hazelnuts, inoculated truffle hosts,
+            and a terroir shaped by the sea.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="mailto:hello@brinygrove.com">Connect with the farm</a>
+            <a class="btn btn-secondary" href="#pillars">Explore the orchard vision</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Farmstead snapshot</h3>
+          <div class="stat-grid">
+            <div class="stat">10-acre orchard footprint</div>
+            <div class="stat">Hazelnuts + inoculated truffle hosts</div>
+            <div class="stat">Oyster shell liming for living soils</div>
+            <div class="stat">Built for events, education, and harvests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="pillars">
+    <div class="container">
+      <h2>What happens at Briny Grove</h2>
+      <p class="section-lead">A resilient orchard designed for long-term production, learning, and memorable gatherings.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Primary production</h3>
+          <p>European hazelnuts and carefully inoculated truffle hosts grown for future commercial harvests.</p>
+        </div>
+        <div class="card">
+          <h3>Regenerative soil management</h3>
+          <p>Biology-forward orchard care, mycology insight, and annual oyster shell liming to build mineral-rich, living soils.</p>
+        </div>
+        <div class="card">
+          <h3>Agrotourism & hospitality</h3>
+          <p>Curated event space for weddings, farm dinners, and seasonal gatherings set amid the orchard rows.</p>
+        </div>
+        <div class="card">
+          <h3>On-farm education</h3>
+          <p>Workshops on sustainable orchard design, permaculture principles, and circular resource loops.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hospitality" style="background: #eef4f5;">
+    <div class="container">
+      <h2>Hospitality with a coastal terroir</h2>
+      <p class="section-lead">From intimate farm dinners to full-scale celebrations, the farmstead showcases Pacific Northwest identity and a sea-to-soil story.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Curated gatherings</h3>
+          <p>Outdoor spaces framed by orchard rows for weddings, seasonal suppers, and community celebrations.</p>
+        </div>
+        <div class="card">
+          <h3>Immersive experiences</h3>
+          <p>Guided walks, tastings, and educational moments that connect guests to the land, fungi, and coastal inputs.</p>
+        </div>
+        <div class="card">
+          <h3>Modular infrastructure</h3>
+          <p>Thoughtful, scalable build-out driven by a background in construction project management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="values">
+    <div class="container">
+      <h2>Why Briny Grove is different</h2>
+      <p class="section-lead">The farm blends science, craftsmanship, and circular resources to create a distinctive orchard identity.</p>
+      <div class="list">
+        <div class="list-item">
+          <span class="pill">Sea-to-soil circularity</span>
+          <p>Locally sourced oyster shells provide annual liming, boosting soil health and weaving coastal influence into every harvest.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Ecology first</span>
+          <p>Regenerative orchard design informed by biology, mycology, and permaculture training builds resilience from the ground up.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Craft + science</span>
+          <p>Anchored in experience across genomics, construction, and mushroom cultivation to deliver precise, scalable systems.</p>
+        </div>
+        <div class="list-item">
+          <span class="pill">Ready to grow</span>
+          <p>Modular infrastructure supports education, agritourism, and eventual commercial hazelnut and truffle sales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <h3>Briny Grove Farmstead</h3>
+      <p>Regenerative hazelnuts and truffles shaped by the Pacific Northwest coast.</p>
+      <p>Reach out at <a href="mailto:hello@brinygrove.com">hello@brinygrove.com</a></p>
+    </div>
+  </footer>
 </body>
 </html>
