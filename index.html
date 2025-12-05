@@ -2,10 +2,518 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Briny Grove Farmstead</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briny Grove Farmstead | Regenerative Hazelnuts &amp; Périgord Truffles</title>
+  <meta name="description" content="Briny Grove Farmstead is a 10-acre hazelnut and Périgord truffle orchard near Washington's Puget Sound, using oyster-shell liming to build living soils and sea-influenced terroir." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #f5f3ef;
+      --card: #f9f7f2;
+      --ink: #1e1a16;
+      --muted: #4b463d;
+      --accent: #b27a4b;
+      --deep-green: #275b63;
+      --border: #dfd6c9;
+      --shadow: 0 10px 28px rgba(46, 36, 28, 0.08);
+      --header-height: 86px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      padding-top: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+      letter-spacing: 0.04em;
+      margin: 0;
+      color: var(--deep-green);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(900px, 92vw);
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    header {
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 12px 0 10px;
+      position: relative;
+      z-index: 5;
+    }
+
+    nav {
+      width: min(900px, 92vw);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 16px;
+      color: var(--deep-green);
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #e9eee6;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--deep-green);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      line-height: 1;
+    }
+
+    .nav-checkbox {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      color: var(--muted);
+      transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: #f0ebe2;
+      border-color: var(--border);
+      color: var(--deep-green);
+      outline: none;
+    }
+
+    .nav-checkbox:checked + .nav-links {
+      display: flex;
+    }
+
+    .hero-wrap {
+      background: #f0ebe2;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 24px 36px;
+      box-shadow: var(--shadow);
+      margin: 18px;
+      margin-top: 16px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5.6vw, 48px);
+      line-height: 1.15;
+    }
+
+    .hero .subhead {
+      font-size: 17px;
+      max-width: 760px;
+      margin-top: 12px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .btn-primary {
+      background: var(--deep-green);
+      color: #fdfbf7;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: #1f4b52;
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--accent);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: #f0ebe2;
+      color: var(--deep-green);
+      outline: none;
+    }
+
+    main section {
+      padding: 48px 18px;
+      scroll-margin-top: 12px;
+    }
+
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    .section-header p {
+      max-width: 720px;
+    }
+
+    .snapshot-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .snapshot-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      color: var(--deep-green);
+    }
+
+    @media (min-width: 640px) {
+      .snapshot-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .orchard-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    .orchard-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .orchard-card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .orchard-card p {
+      margin: 0;
+    }
+
+    @media (min-width: 700px) {
+      .orchard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .symbiosis-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .symbiosis-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .symbiosis-item strong {
+      display: block;
+      color: var(--deep-green);
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .vision {
+      background: #f0ebe2;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .vision p + p {
+      margin-top: 14px;
+    }
+
+    .contact {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-top: 16px;
+    }
+
+    .contact a {
+      color: var(--deep-green);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .contact a:hover,
+    .contact a:focus-visible {
+      border-color: var(--deep-green);
+      outline: none;
+    }
+
+    .hero-wrap {
+      scroll-margin-top: 12px;
+    }
+
+    @media (min-width: 720px) {
+      header {
+        position: sticky;
+        top: 0;
+      }
+
+      nav {
+        padding: 0 18px;
+      }
+
+      .nav-row {
+        gap: 12px;
+      }
+
+      .nav-checkbox {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        margin-top: 0;
+      }
+
+      nav a {
+        padding: 9px 12px;
+        border-radius: 16px;
+      }
+    }
+
+    footer {
+      padding: 28px 18px 8px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Briny Grove Farmstead</h1>
-  <p>Landing page coming soon.</p>
+  <header>
+    <nav aria-label="Main navigation">
+      <div class="nav-row">
+        <a class="brand" href="#top">Briny Grove</a>
+        <label class="nav-toggle" for="nav-checkbox" aria-label="Toggle navigation">
+          <span>☰</span>
+        </label>
+      </div>
+      <input type="checkbox" class="nav-checkbox" id="nav-checkbox" aria-hidden="true" />
+      <div class="nav-links">
+        <a href="#snapshot">Snapshot</a>
+        <a href="#orchard">Orchard</a>
+        <a href="#symbiosis">Symbiosis</a>
+        <a href="#vision">Vision</a>
+        <a href="#about-contact">About &amp; Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="page" id="top">
+    <div class="hero-wrap">
+      <div class="hero">
+        <h1>Regenerative hazelnuts and truffles near Washington's Puget Sound.</h1>
+        <p class="subhead">
+          Briny Grove Farmstead is a 10-acre hazelnut and Périgord truffle orchard in Washington State. We turn waste oyster shells from Puget Sound into a soil input—closing loops, reducing waste, and building a distinct sea-influenced terroir.
+        </p>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="#vision">Explore the orchard vision</a>
+          <a class="btn btn-secondary" href="mailto:hello@brinygrove.com">Contact Briny Grove</a>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section id="snapshot" aria-labelledby="snapshot-title">
+        <div class="section-header">
+          <h2 id="snapshot-title">Farmstead snapshot</h2>
+        </div>
+        <div class="snapshot-grid">
+          <div class="snapshot-item">~10-acre orchard footprint</div>
+          <div class="snapshot-item">European hazelnuts + Périgord black truffles</div>
+          <div class="snapshot-item">Oyster-shell liming for living soils and terroir</div>
+          <div class="snapshot-item">Built for events, education, and seasonal harvests</div>
+        </div>
+      </section>
+
+      <section id="orchard" aria-labelledby="orchard-title">
+        <div class="section-header">
+          <h2 id="orchard-title">Hazelnut + truffle orchard</h2>
+          <p>A resilient dual planting where each hazelnut tree is managed as a host for Périgord truffles and long-term soil health.</p>
+        </div>
+        <div class="orchard-grid">
+          <div class="orchard-card">
+            <h3>Hazelnuts</h3>
+            <p>Cold-hardy European hazelnuts selected for disease resistance, productivity, and flavor. Tree layout is designed for stable root zones, runoff control, and fungal health—each tree chosen and managed as a host for Périgord truffles.</p>
+          </div>
+          <div class="orchard-card">
+            <h3>Périgord truffles</h3>
+            <p>Tuber melanosporum grows beneath the hazelnuts, forming a long-term mycorrhizal partnership with the trees.</p>
+          </div>
+          <div class="orchard-card">
+            <h3>Puget Sound shell inputs</h3>
+            <p>Crushed oyster shells from Puget Sound provide annual liming, keeping soils alkaline enough for truffles while supporting nut yield and resilience.</p>
+          </div>
+          <div class="orchard-card">
+            <h3>Regenerative discipline</h3>
+            <p>Orchard care is informed by mycology, permaculture practice, and shell-based mineral amendments, with an emphasis on soil biology and long-term resilience.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="symbiosis" aria-labelledby="symbiosis-title">
+        <div class="section-header">
+          <h2 id="symbiosis-title">Symbiosis &amp; codependence</h2>
+        </div>
+        <div class="symbiosis-list">
+          <div class="symbiosis-item">
+            <strong>Sugars to the fungi, structure from the trees</strong>
+            <p>The hazelnuts send carbohydrates to the fungi in exchange for nutrients and water, anchoring the fungal network around stable root systems.</p>
+          </div>
+          <div class="symbiosis-item">
+            <strong>Nutrients to the trees, resilience to the orchard</strong>
+            <p>Truffle fungi extend the effective reach of the roots, pulling in minerals and moisture, and buffering the orchard against stress.</p>
+          </div>
+          <div class="symbiosis-item">
+            <strong>Shell-powered pH balance</strong>
+            <p>Annual additions of crushed oyster shells help maintain slightly alkaline soils, supporting truffle development while keeping hazelnuts productive.</p>
+          </div>
+          <div class="symbiosis-item">
+            <strong>Shared terroir</strong>
+            <p>Trees, fungi, and shells together create a sea-influenced terroir that ties Puget Sound's shellfish economy to perennial tree crops.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="vision" aria-labelledby="vision-title">
+        <div class="section-header">
+          <h2 id="vision-title">Farmstead vision</h2>
+        </div>
+        <div class="vision">
+          <p>The orchard is a long-term project centered on soil health and circularity—careful spacing, biological monitoring, and shell-based amendments keep the trees and fungi thriving together.</p>
+          <p>As the plantings mature, the farm is being shaped as a place for intimate gatherings, small workshops, and seasonal harvest experiences that connect guests to the orchard's rhythms.</p>
+          <p>Outputs become inputs: oyster shells from Puget Sound are reintroduced to the land, supporting hazelnut and truffle production while closing loops between coastal resources and perennial crops.</p>
+        </div>
+      </section>
+
+      <section id="about-contact" aria-labelledby="about-title">
+        <div class="section-header">
+          <h2 id="about-title">About &amp; contact</h2>
+        </div>
+        <div class="vision" style="background: var(--card);">
+          <p>Briny Grove Farmstead is a future 10-acre hazelnut and Périgord truffle orchard in Washington State, built around sea-to-soil circularity. The farm will transform waste oyster shells from Puget Sound into a key soil amendment, tying local shellfish economies to perennial tree crops and long-term soil health.</p>
+          <p>We’re in the establishment phase now—laying out orchard blocks, designing event and education spaces, and building partnerships around circular, shell-based soil programs.</p>
+        </div>
+        <div class="contact">
+          <p>Email: <a href="mailto:hello@brinygrove.com">hello@brinygrove.com</a></p>
+          <p>For collaborations, research ideas, or future event inquiries, please reach out.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; Briny Grove Farmstead — Regenerative hazelnuts &amp; Périgord truffles near Puget Sound.</p>
+    </footer>
+  </div>
 </body>
 </html>
